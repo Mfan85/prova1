@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open AI API Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/openai-js@1.2.2/openai.min.js"></script>
+</head>
+<body>
+    <p>
+        Enter some text into the box below and click the 'Submit' button.
+    </p>
+    <input type="text" id="inputText" />
+    <input type="button" value="Submit" onclick="generateResponse()" />
+    <p>
+        The response from Open AI will be printed below:
+    </p>
+    <textarea id="outputText" readonly></textarea>
+    <script>
+        //Create a new OpenAI instance
+        let openAI = new OpenAI('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');
+        
+        //Create a function to generate a response from OpenAI
+        async function generateResponse() {
+            let inputText = document.getElementById('inputText').value;
+            let response = await openAI.query(inputText);
+            let outputText = document.getElementById('outputText');
+            outputText.value = response.data.choices[0].text;
+        }
+    </script>
+</body>
+</html>
